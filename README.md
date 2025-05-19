@@ -1,6 +1,6 @@
 # Form Builder Web Component
 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/json-form-schema)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/json-schema-form-render)
 
 A powerful, customizable, and themeable form builder built as a Web Component. This component leverages modern Web Components technologies to provide a reusable, encapsulated form building solution that can be used in any web application.
 
