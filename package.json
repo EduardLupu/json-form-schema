@@ -1,6 +1,6 @@
 {
   "name": "json-schema-form-render",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A powerful and flexible form builder based on JSON Schema",
   "type": "module",
   "main": "dist/form-builder.js",
@@ -36,4 +36,4 @@
   "devDependencies": {
     "typescript": "^5.0.0"
   }
-} 
+}
