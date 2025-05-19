@@ -1,7 +1,9 @@
-# Form Builder Web Component
+# JSON Schema Form Render
 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/json-schema-form-render)
-[![Demo](https://img.shields.io/badge/demo-live-green.svg)](https://eduardlupu.github.io/json-schema-form-render/)
+[![npm version](https://badge.fury.io/js/json-schema-form-render.svg)](https://badge.fury.io/js/json-schema-form-render)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub release](https://img.shields.io/github/release/EduardLupu/json-schema-form-render.svg)](https://github.com/EduardLupu/json-schema-form-render/releases)
+[![GitHub Pages](https://img.shields.io/badge/demo-GitHub%20Pages-blue)](https://eduardlupu.github.io/json-schema-form-render/)
 
 A powerful, customizable, and themeable form builder built as a Web Component. This component leverages modern Web Components technologies to provide a reusable, encapsulated form building solution that can be used in any web application.
 
@@ -166,6 +168,7 @@ interface FormField {
   options?: FieldOption[];
   defaultValue?: string | boolean | number;
   helpText?: string;
+  // New styling options
   style?: {
     width?: string;
     height?: string;
@@ -179,16 +182,17 @@ interface FormField {
     fontWeight?: string;
     customClass?: string;
   };
-  searchable?: boolean;
-  multiple?: boolean;
-  min?: number;
-  max?: number;
-  step?: number;
-  pattern?: string;
-  rows?: number;
-  cols?: number;
-  autocomplete?: string;
-  countryCode?: string;
+  // Field-specific options
+  searchable?: boolean; // For select fields
+  multiple?: boolean; // For select fields
+  min?: number; // For number fields
+  max?: number; // For number fields
+  step?: number; // For number fields
+  pattern?: string; // For text fields
+  rows?: number; // For textarea
+  cols?: number; // For textarea
+  autocomplete?: string; // For input fields
+  countryCode?: string; // For telephone fields
 }
 ```
 
@@ -399,6 +403,8 @@ The component uses modern web standards and is compatible with:
 4. Push to the branch
 5. Create a Pull Request
 
+Contributions are welcome! Please feel free to submit a Pull Request.
+
 ## License
 
-MIT License 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 

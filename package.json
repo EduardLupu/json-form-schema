@@ -1,7 +1,8 @@
 {
   "name": "json-schema-form-render",
   "version": "1.0.0",
-  "description": "A powerful, customizable, and themeable form builder built as a Web Component",
+  "description": "A powerful and flexible form builder based on JSON Schema",
+  "type": "module",
   "main": "dist/form-builder.js",
   "module": "dist/form-builder.js",
   "types": "dist/form-builder.d.ts",
@@ -12,25 +13,27 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "web-components",
-    "form",
-    "json-schema",
-    "form-builder",
-    "custom-elements",
-    "typescript"
-  ],
-  "author": "Eduard Lupu",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EduardLupu/json-schema-form-render.git"
   },
+  "keywords": [
+    "web-components",
+    "form-builder",
+    "json-schema",
+    "form",
+    "render",
+    "json-to-form",
+    "validation",
+    "custom-elements"
+  ],
+  "author": "Eduard Lupu",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/EduardLupu/json-schema-form-render/issues"
   },
   "homepage": "https://github.com/EduardLupu/json-schema-form-render#readme",
   "devDependencies": {
-    "typescript": "^4.9.5"
+    "typescript": "^5.0.0"
   }
 } 
