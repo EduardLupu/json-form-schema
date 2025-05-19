@@ -1,0 +1,36 @@
+{
+  "name": "json-schema-form",
+  "version": "1.0.0",
+  "description": "A powerful, customizable, and themeable form builder built as a Web Component",
+  "main": "dist/form-builder.js",
+  "module": "dist/form-builder.js",
+  "types": "dist/form-builder.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "web-components",
+    "form",
+    "json-schema",
+    "form-builder",
+    "custom-elements",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/json-schema-form.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/json-schema-form/issues"
+  },
+  "homepage": "https://github.com/yourusername/json-schema-form#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+} 
