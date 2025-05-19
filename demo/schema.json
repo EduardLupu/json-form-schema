@@ -1,0 +1,140 @@
+{
+    "fields": [
+       {
+          "type":"text",
+          "name":"name",
+          "label":"Full Name",
+          "required":true,
+          "placeholder":"Enter your full name",
+          "pattern": "^[a-zA-Z\\s]{2,50}$",
+          "helpText":"Enter your full name (2-50 characters, letters only)"
+       },
+       {
+          "type":"email",
+          "name":"email",
+          "label":"Email",
+          "required":true,
+          "placeholder":"Enter your email",
+          "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+          "helpText":"Enter a valid email address"
+       },
+       {
+          "type":"password",
+          "name":"password",
+          "label":"Password",
+          "required":true,
+          "placeholder":"Enter your password",
+          "pattern": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+          "helpText":"Password must be at least 8 characters long and include both letters and numbers"
+       },
+       {
+          "type":"telephone",
+          "name":"phone",
+          "label":"Phone Number",
+          "required":true,
+          "placeholder":"Enter your phone number",
+          "countryCode":"us",
+          "pattern": "^\\d{10}$",
+          "helpText":"Enter a valid 10-digit phone number"
+       },
+       {
+          "type":"select",
+          "name":"country",
+          "label":"Country",
+          "required":true,
+          "options":[
+             "United States",
+             "Canada",
+             "United Kingdom",
+             "Australia",
+             "Germany",
+             "France",
+             "Japan",
+             "China",
+             "India",
+             "Brazil",
+             "Romania"
+          ],
+          "searchable":true
+       },
+       {
+          "type":"number",
+          "name":"age",
+          "label":"Age",
+          "required":true,
+          "min":18,
+          "max":120,
+          "helpText":"You must be at least 18 years old"
+       },
+       {
+          "type":"date",
+          "name":"birthdate",
+          "label":"Birth Date",
+          "required":true,
+          "helpText":"Please enter your date of birth"
+       },
+       {
+          "type":"time",
+          "name":"appointment_time",
+          "label":"Appointment Time",
+          "required":true,
+          "helpText":"Please select your preferred appointment time"
+       },
+       {
+          "type":"color",
+          "name":"favorite_color",
+          "label":"Favorite Color",
+          "defaultValue":"#3b82f6",
+          "helpText":"Select your favorite color"
+       },
+       {
+          "type":"file",
+          "name":"documents",
+          "label":"Documents",
+          "multiple":true,
+          "helpText":"Upload your documents (PDF, DOC, DOCX)",
+          "required":true
+       },
+       {
+          "type":"image",
+          "name":"profile_images",
+          "label":"Profile Images",
+          "multiple":true,
+          "helpText":"Upload your profile images (JPG, PNG, GIF)",
+          "required":true
+       },
+       {
+          "type":"textarea",
+          "name":"bio",
+          "label":"Bio",
+          "placeholder":"Tell us about yourself",
+          "rows":4,
+          "pattern": "^.{0,500}$",
+          "helpText":"Maximum 500 characters"
+       },
+       {
+          "type":"checkbox",
+          "name":"newsletter",
+          "label":"Subscribe to newsletter"
+       },
+       {
+          "type":"radio",
+          "name":"preference",
+          "label":"Preferred Contact Method",
+          "options":[
+             {
+                "label":"Email",
+                "value":"email"
+             },
+             {
+                "label":"Phone",
+                "value":"phone"
+             },
+             {
+                "label":"SMS",
+                "value":"sms"
+             }
+          ]
+       }
+    ]
+ }

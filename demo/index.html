@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Schema Form Render - Documentation & Demo</title>
+    <script type="module" src="https://unpkg.com/json-schema-form-render@latest/dist/form-builder.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #0d0d0e;
+            --primary-hover: #080808;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+            --code-bg: #f1f5f9;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .demo-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--code-bg);
+            border-radius: 6px;
+        }
+
+        .theme-selector {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        select {
+            padding: 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background: white;
+        }
+
+        .submission-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .submission-data {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .nav-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--code-bg);
+        }
+
+        .method-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .method-tab {
+            padding: 0.5rem 1rem;
+            background: var(--code-bg);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .method-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .method-content {
+            display: none;
+        }
+
+        .method-content.active {
+            display: block;
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+        }
+
+        .github-link:hover {
+            background-color: var(--code-bg);
+        }
+
+        .github-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .docs-content {
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 1rem;
+            background: var(--code-bg);
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        .docs-content img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .docs-content pre {
+            background: white;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .docs-content code {
+            background: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JSON Schema Form Render</h1>
+            <p class="subtitle">A powerful and flexible form builder based on JSON Schema</p>
+            <div class="nav-links">
+                <a href="#installation">Installation</a>
+                <a href="#usage">Usage</a>
+                <a href="#examples">Examples</a>
+                <a href="#demo">Live Demo</a>
+                <a href="#docs">Documentation</a>
+            </div>
+            <a href="https://github.com/EduardLupu/json-schema-form-render" class="github-link" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                View on GitHub
+            </a>
+        </header>
+
+        <section id="installation" class="section">
+            <h2>Installation</h2>
+            <p>Add the component to your HTML using a CDN:</p>
+            <div class="code-block">
+                <pre><code>&lt;script type="module" src="https://unpkg.com/json-schema-form-render@latest/dist/form-builder.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
+            <p>Or install via npm:</p>
+            <div class="code-block">
+                <pre><code>npm install json-schema-form-render</code></pre>
+            </div>
+        </section>
+
+        <section id="usage" class="section">
+            <h2>Usage Methods</h2>
+            <div class="method-tabs">
+                <button class="method-tab active" data-method="attribute">Schema Attribute</button>
+                <button class="method-tab" data-method="javascript">JavaScript Object</button>
+                <button class="method-tab" data-method="external">External JSON</button>
+            </div>
+
+            <div id="attribute-method" class="method-content active">
+                <h3>Using Schema Attribute</h3>
+                <p>Define the schema directly in the HTML:</p>
+                <div class="code-block">
+                    <pre><code>&lt;form-builder
+    schema='{
+        "fields": [
+            {
+                "type": "text",
+                "name": "username",
+                "label": "Username",
+                "required": true
+            }
+        ]
+    }'
+&gt;&lt;/form-builder&gt;</code></pre>
+                </div>
+            </div>
+
+            <div id="javascript-method" class="method-content">
+                <h3>Using JavaScript Object</h3>
+                <p>Set the schema using JavaScript:</p>
+                <div class="code-block">
+                    <pre><code>const schema = {
+    fields: [
+        {
+            type: "text",
+            name: "username",
+            label: "Username",
+            required: true
+        }
+    ]
+};
+
+document.getElementById('form-builder')
+    .setAttribute('schema', JSON.stringify(schema));</code></pre>
+                </div>
+            </div>
+
+            <div id="external-method" class="method-content">
+                <h3>Using External JSON File</h3>
+                <p>Load the schema from an external file:</p>
+                <div class="code-block">
+                    <pre><code>&lt;form-builder schema-url="schema.json"&gt;&lt;/form-builder&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="examples" class="section">
+            <h2>Features & Examples</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Multiple Input Types</h3>
+                    <p>Support for text, email, password, select, radio, checkbox, date, color, file, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Custom Styling</h3>
+                    <p>Customize the appearance with theme styles and colors.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Validation</h3>
+                    <p>Built-in validation with customizable error messages.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Responsive Design</h3>
+                    <p>Fully responsive forms that work on all devices.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo" class="section">
+            <h2>Live Demo</h2>
+            <p>Try out the form builder with different themes and configurations:</p>
+            
+            <div class="theme-selector">
+                <label for="theme-style">Theme Style:</label>
+                <select id="theme-style">
+                    <option value="modern">Modern</option>
+                    <option value="minimal">Minimal</option>
+                    <option value="rounded">Rounded</option>
+                    <option value="flat">Flat</option>
+                    <option value="outlined">Outlined</option>
+                </select>
+                
+                <label for="theme-color">Theme Color:</label>
+                <select id="theme-color">
+                    <option value="ocean">Ocean</option>
+                    <option value="sunset">Sunset</option>
+                    <option value="forest">Forest</option>
+                    <option value="cosmic">Cosmic</option>
+                    <option value="solarized">Solarized</option>
+                </select>
+            </div>
+
+            <div class="demo-container">
+                <form-builder id="demo-form" theme-style="modern" theme-color="ocean" schema-url="schema.json"></form-builder>
+
+                <div class="submission-container" id="submission">
+                    <h3>Form Submission Data</h3>
+                    <div class="submission-data"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="docs" class="section">
+            <h2>Documentation</h2>
+            <div class="docs-content" id="readme-content">
+                Loading documentation...
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Configure marked options
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: true,
+            mangle: false
+        });
+
+        // Theme handling
+        const themeStyle = document.getElementById('theme-style');
+        const themeColor = document.getElementById('theme-color');
+        const demoForm = document.getElementById('demo-form');
+
+        themeStyle.addEventListener('change', (e) => {
+            demoForm.setAttribute('theme-style', e.target.value);
+        });
+
+        themeColor.addEventListener('change', (e) => {
+            demoForm.setAttribute('theme-color', e.target.value);
+        });
+
+        // Form submission handling
+        demoForm.addEventListener('formSubmit', (e) => {
+            const submissionContainer = document.getElementById('submission');
+            const submissionData = submissionContainer.querySelector('.submission-data');
+            submissionData.textContent = JSON.stringify(e.detail.values, null, 2);
+            submissionContainer.style.display = 'block';
+        });
+
+        // Method tabs handling
+        const methodTabs = document.querySelectorAll('.method-tab');
+        const methodContents = document.querySelectorAll('.method-content');
+
+        methodTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                methodTabs.forEach(t => t.classList.remove('active'));
+                methodContents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const methodId = `${tab.dataset.method}-method`;
+                document.getElementById(methodId).classList.add('active');
+            });
+        });
+
+        // Load README content
+        fetch('https://raw.githubusercontent.com/EduardLupu/json-schema-form-render/main/README.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(text => {
+                const content = document.getElementById('readme-content');
+                try {
+                    const htmlContent = marked.parse(text);
+                    content.innerHTML = htmlContent;
+                } catch (error) {
+                    console.error('Error parsing markdown:', error);
+                    content.innerHTML = '<p>Error parsing documentation. Please visit the <a href="https://github.com/EduardLupu/json-schema-form-render" target="_blank">GitHub repository</a> to view the documentation.</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading documentation:', error);
+                document.getElementById('readme-content').innerHTML = '<p>Error loading documentation. Please visit the <a href="https://github.com/EduardLupu/json-schema-form-render" target="_blank">GitHub repository</a> to view the documentation.</p>';
+            });
+    </script>
+</body>
+</html> 

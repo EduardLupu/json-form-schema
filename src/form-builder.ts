@@ -2625,10 +2625,33 @@ export class FormBuilder extends HTMLElement {
   private validateForm(values: FormValues): Record<string, string> {
     const errors: Record<string, string> = {};
     this.schema.forEach(field => {
+      const value = values[field.name];
+      
+      // Required field validation
       if (field.required) {
-        const value = values[field.name];
         if (!value || (typeof value === 'string' && value.trim() === '')) {
           errors[field.name] = `${field.label} is required`;
+        }
+      }
+
+      // Pattern validation for text-based fields
+      if (field.pattern && value && typeof value === 'string') {
+        const pattern = new RegExp(field.pattern);
+        if (!pattern.test(value)) {
+          errors[field.name] = `${field.label} format is invalid`;
+        }
+      }
+
+      // Min/Max validation for number fields
+      if (field.type === 'number' && typeof value === 'string') {
+        const numValue = parseFloat(value);
+        if (!isNaN(numValue)) {
+          if (field.min !== undefined && numValue < field.min) {
+            errors[field.name] = `${field.label} must be at least ${field.min}`;
+          }
+          if (field.max !== undefined && numValue > field.max) {
+            errors[field.name] = `${field.label} must be at most ${field.max}`;
+          }
         }
       }
     });
@@ -2773,6 +2796,20 @@ export class FormBuilder extends HTMLElement {
     try {
       const response = await fetch(url);
       const data = await response.json();
+      
+      // Handle theme configuration
+      if (data.theme) {
+        if (data.theme.style) {
+          this.currentTheme.style = data.theme.style;
+          this.setAttribute('theme-style', data.theme.style);
+        }
+        if (data.theme.color) {
+          this.currentTheme.color = data.theme.color;
+          this.setAttribute('theme-color', data.theme.color);
+        }
+        this.updateTheme();
+      }
+      
       this.schema = data.fields || data;
       this.render();
     } catch (error) {
